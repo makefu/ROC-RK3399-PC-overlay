@@ -16,4 +16,9 @@ action "samueldr/action-nix-build@509cecf58864761b41748dff0a60cf7157c6657f" {
 
 action "docker://nixos/nix" {
   uses = "docker://nixos/nix"
+  runs = "nix-build"
+  args = "-A pkgsCross.aarch64-multiplatform.ROC-RK3399-PC.firmware"
+  env = {
+    NIXPKGS_ALLOW_UNFREE = "1"
+  }
 }
