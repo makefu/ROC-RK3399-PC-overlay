@@ -1,10 +1,14 @@
-{ stdenv, ROC-RK3399-PC }:
+{ stdenv
+
+# TODO: i cannot explicitly provide "board" or a similar variable, then rkbin
+# will be un-patch-elf-ed when including it
+, AIO-3399C }:
 
 let
-  inherit (ROC-RK3399-PC) u-boot rkbin;
+  inherit (AIO-3399C) u-boot rkbin;
 in
 stdenv.mkDerivation rec {
-  pname = "ROC-RK3399-PC-firmware";
+  pname = "AIO-3399C-firmware";
   version = "2019-02-14";
   name = "${pname}-${version}";
 
@@ -16,9 +20,6 @@ stdenv.mkDerivation rec {
     rkbin
   ];
 
-  # Reading material:
-  #  * https://github.com/FireflyTeam/u-boot/blob/1ce6742a2e94f14352b58132f45689e9205de712/make.sh#L434-L435
-  #  * http://opensource.rock-chips.com/wiki_Boot_option#Boot_from_SD.2FTF_Card
   installPhase = ''
     (
     PS4=" $ "
@@ -44,7 +45,7 @@ stdenv.mkDerivation rec {
     dd if=trust.img of=combined.img seek=$(( 0x6000 - 64 ))
 
     mkdir -p $out
-    mv combined.img $out/
+    mv uboot.img trust.img idbloader.img combined.img $out/
     )
   '';
 

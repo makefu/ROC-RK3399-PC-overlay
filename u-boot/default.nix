@@ -1,6 +1,7 @@
 # NOTE: This is **only** the open source bits from a u-boot build.
 #       DO NOT create idbloader or anything requiring the rockchip loaders here.
 { lib, buildUBoot, fetchFromGitHub, fetchpatch
+, defconfig ? "roc-rk3399-pc_defconfig"
   # Passing a BL31 binary will built u-boot.itb with the downstream script.
 , BL31 ? null
 }:
@@ -24,8 +25,7 @@ buildUBoot rec {
     ./0002-rk3399-roc-pc-Specifies-upstream-DTB-file-name.patch
   ];
 
-  defconfig = "roc-rk3399-pc_defconfig";
-
+  inherit defconfig;
   extraMakeFlags = [
     "all"
   ]
