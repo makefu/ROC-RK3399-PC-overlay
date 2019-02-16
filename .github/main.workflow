@@ -1,6 +1,9 @@
 workflow "New workflow" {
   on = "push"
-  resolves = ["samueldr/action-nix-build@509cecf58864761b41748dff0a60cf7157c6657f"]
+  resolves = [
+    "samueldr/action-nix-build@509cecf58864761b41748dff0a60cf7157c6657f",
+    "docker://nixos/nix",
+  ]
 }
 
 action "samueldr/action-nix-build@509cecf58864761b41748dff0a60cf7157c6657f" {
@@ -9,4 +12,8 @@ action "samueldr/action-nix-build@509cecf58864761b41748dff0a60cf7157c6657f" {
   env = {
     NIXPKGS_ALLOW_UNFREE = "1"
   }
+}
+
+action "docker://nixos/nix" {
+  uses = "docker://nixos/nix"
 }
