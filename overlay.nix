@@ -11,7 +11,7 @@ in
   };
   AIO-3399C = {
     rkbin = callPackage ./rkbin {};
-    u-boot = callPackage ./u-boot { defconfig = "firefly-rk3399_defconfig"; };
+    u-boot = callPackage ./u-boot/aio-3399c.nix { defconfig = "firefly-rk3399_defconfig"; };
     firmware = callPackage ./firmware/aio-3399c.nix { };
   };
 }

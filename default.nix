@@ -4,7 +4,6 @@
   }
 }:
 
-pkgs.ROC-RK3399-PC //
 {
   # Pass through the cross-compilation infra
   inherit (pkgs) pkgsCross AIO-3399C ROK-RK3399-PC;
